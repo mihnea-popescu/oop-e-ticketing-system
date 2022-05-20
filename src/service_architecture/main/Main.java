@@ -1,7 +1,9 @@
 package service_architecture.main;
 import service_architecture.model.*;
+import service_architecture.service.CreateClient;
 import service_architecture.service.CreateVenue;
 import service_architecture.service.EditVenue;
+import service_architecture.service.SelectClient;
 import service_architecture.service.fileio.GetCSVData;
 import service_architecture.service.fileio.WriteCSVData;
 
@@ -30,7 +32,7 @@ public class Main {
         System.out.println("*");
         System.out.println("*");
         System.out.println("E-TICKETING SYSTEM");
-        System.out.println("1. LOGIN AS USER");
+        System.out.println("1. LOGIN AS CLIENT");
         System.out.println("2. LOGIN AS ORGANIZER");
         System.out.println("3. SYSTEM ADMINISTRATION");
         System.out.println("0. EXIT");
@@ -40,7 +42,8 @@ public class Main {
         option = scan.nextInt();
         switch(option) {
             case 1: {
-                // LOGIN AS USER
+                // LOGIN AS CLIENT
+                this.clientMenu();
                 break;
             }
             case 2: {
@@ -52,11 +55,51 @@ public class Main {
                 this.adminMenu();
                 break;
             }
-            case 0: { }
+            case 0: { break; }
             default: {
                 System.out.println("IMPOSSIBLE OPERATION");
                 this.menu();
             }
+        }
+    }
+
+    private void clientMenu() {
+        ArrayList<Client> clients = this.getClients();
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("CLIENT MENU");
+        for(Client client : clients) {
+            System.out.println((clients.indexOf(client)+1) + ". " + client.getName() + " " + client.getEmail() + " " + client.getPhone());
+        }
+        System.out.println((clients.size() + 1) + ". Register a new client");
+        System.out.println("0. PREVIOUS MENU");
+        System.out.println("Enter your input...");
+        Integer option;
+        Scanner scan = new Scanner(System.in);
+        option = scan.nextInt();
+        if(option == 0) {
+            this.menu();
+        }
+        else if(option >= 1 && option <= clients.size()) {
+            // select a client
+            Client client = clients.get(option - 1);
+            SelectClient sc = new SelectClient(client, this.getEvents(), this.getVenues(), this.getOrganisers());
+            Client newClient = sc.ManageClient();
+            clients.set(option - 1, newClient);
+            clientMenu();
+        }
+        else if(option == (clients.size() + 1)) {
+            // register a new client
+            CreateClient cc = new CreateClient();
+            Client client = cc.CreateClient();
+            clients.add(client);
+            clientMenu();
+        }
+        else {
+            // unexpected command
+            System.out.println("IMPOSSIBLE OPERATION");
+            this.clientMenu();
         }
     }
 
