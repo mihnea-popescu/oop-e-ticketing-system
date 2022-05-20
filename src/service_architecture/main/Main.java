@@ -255,47 +255,26 @@ public class Main {
 
         if(map.containsKey("venues")) {
             this.setVenues(map.get("venues"));
-            for (Venue venue:
-                    this.getVenues()) {
-                System.out.println(venue.hashCode());
-            }
         }
         System.out.println("Found " + this.getVenues().size() +" venues.");
 
         if(map.containsKey("organisers")) {
             this.setOrganisers(map.get("organisers"));
-            for (Organiser organiser:
-                    this.getOrganisers()) {
-                System.out.println("Organiser id " + organiser.hashCode());
-            }
         }
         System.out.println("Found " + this.getOrganisers().size() + " organisers.");
 
         if(map.containsKey("events")) {
             this.setEvents(map.get("events"));
-            for (Event event:
-                    this.getEvents()) {
-                System.out.println(event);
-                System.out.println(event.hashCode());
-            }
         }
         System.out.println("Found "+ this.getEvents().size() + " events.");
 
         if(map.containsKey("clients")) {
             this.setClients(map.get("clients"));
-            for(Client client: this.getClients()) {
-                System.out.println(client);
-                System.out.println(client.hashCode());
-            }
         }
         System.out.println("Found " + this.getClients().size() + " clients.");
 
         if(map.containsKey("tickets")) {
             ArrayList<Ticket> tickets = map.get("tickets");
-            for(Ticket ticket: tickets) {
-                System.out.println(ticket);
-                System.out.println("Ticket id: " + ticket.getId());
-            }
 
             for(Client client : this.getClients()) {
                 ArrayList<Ticket> clientTickets = new ArrayList<Ticket>();

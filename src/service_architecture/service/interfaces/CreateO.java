@@ -1,6 +1,7 @@
 package service_architecture.service.interfaces;
 
 import service_architecture.model.Organiser;
+import service_architecture.service.audit.AuditLog;
 
 import java.util.Scanner;
 
@@ -29,6 +30,7 @@ public interface CreateO {
         o.setEmail(email);
         o.setCompany(company);
         o.setBalance(0);
+        AuditLog.getInstance().log("Added organiser " + name);
         return o;
     };
 }

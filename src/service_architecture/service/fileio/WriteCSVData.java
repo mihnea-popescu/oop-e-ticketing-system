@@ -1,6 +1,7 @@
 package service_architecture.service.fileio;
 
 import service_architecture.model.*;
+import service_architecture.service.audit.AuditLog;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -47,6 +48,9 @@ public class WriteCSVData {
         writeClients(basePath, clients);
 
         System.out.println("Saved " + ticketCount + " tickets.");
+
+        AuditLog.getInstance().writeData(basePath);
+
         System.out.println("Saved all data successfully.");
     }
 

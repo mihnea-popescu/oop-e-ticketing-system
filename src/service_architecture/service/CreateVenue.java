@@ -1,6 +1,7 @@
 package service_architecture.service;
 
 import service_architecture.model.Venue;
+import service_architecture.service.audit.AuditLog;
 
 import java.util.Scanner;
 
@@ -36,6 +37,7 @@ public class CreateVenue {
         System.out.println("Enter your input: ");
         opened = scan.nextBoolean();
         Venue venue = new Venue(name, address, capacity, opened);
+        AuditLog.getInstance().log("Created venue " + venue.getName());
         return venue;
     }
 }

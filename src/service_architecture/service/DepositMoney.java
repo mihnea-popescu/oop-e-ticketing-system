@@ -1,6 +1,7 @@
 package service_architecture.service;
 
 import service_architecture.model.Client;
+import service_architecture.service.audit.AuditLog;
 import service_architecture.service.exceptions.NotMoneyNumber;
 
 import java.util.Scanner;
@@ -60,6 +61,7 @@ public class DepositMoney {
             client.setBalance(client.getBalance() + amount);
             System.out.println("TRANSACTION SUCCESSFUL!");
             System.out.println(amount + "$ have been added to your account.");
+            AuditLog.getInstance().log("User " + client.getName() + " added " + amount + "$ in his balance.");
         }
     }
 }

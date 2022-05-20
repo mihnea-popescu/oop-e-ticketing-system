@@ -1,6 +1,7 @@
 package service_architecture.service;
 
 import service_architecture.model.Venue;
+import service_architecture.service.audit.AuditLog;
 
 import java.util.Scanner;
 
@@ -38,6 +39,7 @@ public class EditVenue {
                 System.out.println("Enter the new name of the venue: ");
                 line = scan.nextLine();
                 this.getVenue().setName(line.replace(",",""));
+                AuditLog.getInstance().log("Edited name of venue " + this.getVenue().getName());
                 this.menu();
                 break;
             }
@@ -47,6 +49,7 @@ public class EditVenue {
                 System.out.println("Enter the new address of the venue: ");
                 line = scan.nextLine();
                 this.getVenue().setAddress(line.replace(",",""));
+                AuditLog.getInstance().log("Edited address of venue " + this.getVenue().getName());
                 this.menu();
                 break;
             }
@@ -54,6 +57,7 @@ public class EditVenue {
                 // capacity
                 System.out.println("*");
                 System.out.println("Enter the new capacity of the venue: ");
+                AuditLog.getInstance().log("Edited capacity of venue " + this.getVenue().getName());
                 option = scan.nextInt();
                 this.getVenue().setCapacity(option);
                 this.menu();
@@ -65,6 +69,7 @@ public class EditVenue {
                 System.out.println("Enter the new status of the venue (true/false): ");
                 Boolean opt = scan.nextBoolean();
                 this.getVenue().setOpened(opt);
+                AuditLog.getInstance().log("Edited opened of venue " + this.getVenue().getName());
                 this.menu();
                 break;
             }

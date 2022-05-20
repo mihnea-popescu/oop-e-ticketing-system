@@ -3,6 +3,7 @@ package service_architecture.service;
 import service_architecture.model.Event;
 import service_architecture.model.Organiser;
 import service_architecture.model.Venue;
+import service_architecture.service.audit.AuditLog;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -21,6 +22,7 @@ public class CreateEvent {
     public Event create() {
         this.startMenu();
 
+        AuditLog.getInstance().log("Created event " + this.getEvent().getName());
         return this.getEvent();
     }
 

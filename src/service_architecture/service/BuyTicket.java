@@ -49,6 +49,7 @@ public class BuyTicket {
         this.getClient().setTickets(userTickets);
 
         System.out.println("Ticket bought!");
+
         return true;
     }
 

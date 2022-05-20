@@ -2,6 +2,7 @@ package service_architecture.service;
 
 import service_architecture.model.*;
 import service_architecture.model.enums.ticketType;
+import service_architecture.service.audit.AuditLog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class ManageEvent {
                 break;
             }
             default: {
-                System.out.println("INVALID INPUT!)");
+                System.out.println("INVALID INPUT!");
                 this.manage();
             }
         }
@@ -64,6 +65,7 @@ public class ManageEvent {
                 ticket.setUsed(false);
                 ticket.setDate_bought(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
                 c.getTickets().add(ticket);
+                AuditLog.getInstance().log("Organizer " + this.getOrganiser().getName() + " gave away a ticket to " + c.getName() + " for event " + this.getEvent().getName());
             }
         }
 
@@ -101,6 +103,7 @@ public class ManageEvent {
                         // process ticket
                         t.setUsed(true);
                         found = true;
+                        AuditLog.getInstance().log("Organiser " + this.getOrganiser().getName() + " processed ticket id " + t.getId());
                     }
                 }
             }
@@ -114,6 +117,7 @@ public class ManageEvent {
                         // process ticket
                         t.setUsed(true);
                         found = true;
+                        AuditLog.getInstance().log("Organiser " + this.getOrganiser().getName() + " processed ticket id " + t.getId());
                     }
                 }
             }

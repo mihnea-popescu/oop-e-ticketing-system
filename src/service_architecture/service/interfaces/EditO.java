@@ -4,6 +4,7 @@ import service_architecture.model.Client;
 import service_architecture.model.Event;
 import service_architecture.model.Organiser;
 import service_architecture.model.Ticket;
+import service_architecture.service.audit.AuditLog;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -33,6 +34,7 @@ public interface EditO {
                  line = scan.nextLine().replace(",","");
                  organiser.setName(line);
                  System.out.println("NAME UPDATED!");
+                 AuditLog.getInstance().log("Edited name of organiser " + organiser.getName());
              }
              else if(option == 2) {
                  // email
@@ -41,6 +43,7 @@ public interface EditO {
                  line = scan.nextLine().replace(",","");
                  organiser.setEmail(line);
                  System.out.println("E-MAIL UPDATED!");
+                 AuditLog.getInstance().log("Edited email of organiser " + organiser.getEmail());
              }
              else if(option == 3) {
                  // company
@@ -49,6 +52,7 @@ public interface EditO {
                  line = scan.nextLine().replace(",","");
                  organiser.setCompany(line);
                  System.out.println("COMPANY UPDATED!");
+                 AuditLog.getInstance().log("Edited company of organiser " + organiser.getCompany());
              }
              else {
                  // wrong answer

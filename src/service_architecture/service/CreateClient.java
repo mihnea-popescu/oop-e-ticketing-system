@@ -1,6 +1,7 @@
 package service_architecture.service;
 
 import service_architecture.model.Client;
+import service_architecture.service.audit.AuditLog;
 
 import java.util.Scanner;
 
@@ -37,6 +38,7 @@ public class CreateClient {
         client.setBalance(0);
 
         System.out.println("Client created!");
+        AuditLog.getInstance().log("Created client " + client.getName());
         return client;
     }
 }
