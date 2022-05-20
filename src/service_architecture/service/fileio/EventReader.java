@@ -25,7 +25,7 @@ public class EventReader {
         try(BufferedReader br = new BufferedReader(new FileReader(basePath+"event_list.csv"))) {
             while((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if(values.length > 0) {
+                if(values.length > 0 && values[0] != null && values[0] != "") {
                     Event event = new Event();
                     event.setOrganiser(Integer.parseInt(values[0]));
                     event.setName(values[1]);

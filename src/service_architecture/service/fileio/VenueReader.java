@@ -25,7 +25,7 @@ public class VenueReader {
         try(BufferedReader br = new BufferedReader(new FileReader(basePath+"venue_list.csv"))) {
             while((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if(values.length > 0) {
+                if(values.length > 0 && values[0] != null && values[0] != "") {
                     Venue venue = new Venue();
                     venue.setName(values[0]);
                     venue.setAddress(values[1]);

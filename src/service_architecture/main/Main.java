@@ -1,6 +1,7 @@
 package service_architecture.main;
 import service_architecture.model.*;
 import service_architecture.service.fileio.GetCSVData;
+import service_architecture.service.fileio.WriteCSVData;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class Main {
     private ArrayList<Event> events;
 
     private void getData() {
+        System.out.println("Loading the data...");
         String basePath = this.basePath;
 
         //inputs
@@ -94,8 +96,13 @@ public class Main {
 
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println("Loading the data...");
         main.getData();
+        main.saveData();
+    }
+
+    public void saveData() {
+        WriteCSVData singleton = WriteCSVData.getInstance();
+        singleton.saveData(basePath, this.getVenues(), this.getOrganisers(), this.getEvents(), this.getClients());
     }
 
     public ArrayList<Client> getClients() {

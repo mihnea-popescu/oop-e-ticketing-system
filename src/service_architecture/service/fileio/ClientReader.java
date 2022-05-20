@@ -25,7 +25,7 @@ public class ClientReader {
         try(BufferedReader br = new BufferedReader(new FileReader(basePath+"client_list.csv"))) {
             while((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if(values.length > 0) {
+                if(values.length > 0 && values[0] != null && values[0] != "") {
                     Client client = new Client();
                     client.setName(values[0]);
                     client.setEmail(values[1]);

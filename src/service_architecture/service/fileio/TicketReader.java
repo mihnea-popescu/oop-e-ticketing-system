@@ -26,7 +26,7 @@ public class TicketReader {
         try (BufferedReader br = new BufferedReader(new FileReader(basePath + "ticket_list.csv"))) {
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if (values.length > 0) {
+                if(values.length > 0 && values[0] != null && values[0] != "") {
                     Ticket ticket = new Ticket();
                     ticket.setUser(Integer.parseInt(values[0]));
                     ticket.setEvent(Integer.parseInt(values[1]));

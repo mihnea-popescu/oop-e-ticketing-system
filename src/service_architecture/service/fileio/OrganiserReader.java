@@ -26,7 +26,7 @@ public class OrganiserReader {
         try(BufferedReader br = new BufferedReader(new FileReader(basePath+"organiser_list.csv"))) {
             while((line = br.readLine()) != null) {
                 String[] values = line.split(",");
-                if(values.length > 0) {
+                if(values.length > 0 && values[0] != null && values[0] != "") {
                     Organiser organiser = new Organiser();
                     // String name, String email, ArrayList<Ticket> tickets, String company, String permissions, int balance
                     organiser.setName(values[0]);
