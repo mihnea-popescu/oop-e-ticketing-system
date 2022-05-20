@@ -47,6 +47,7 @@ public class WriteCSVData {
         writeClients(basePath, clients);
 
         System.out.println("Saved " + ticketCount + " tickets.");
+        System.out.println("Saved all data successfully.");
     }
 
     public static void writeVenues(String basePath, ArrayList<Venue> venues) {
