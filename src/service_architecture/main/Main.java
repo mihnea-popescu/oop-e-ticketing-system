@@ -1,9 +1,6 @@
 package service_architecture.main;
 import service_architecture.model.*;
-import service_architecture.service.CreateClient;
-import service_architecture.service.CreateVenue;
-import service_architecture.service.EditVenue;
-import service_architecture.service.SelectClient;
+import service_architecture.service.*;
 import service_architecture.service.fileio.GetCSVData;
 import service_architecture.service.fileio.WriteCSVData;
 
@@ -33,7 +30,7 @@ public class Main {
         System.out.println("*");
         System.out.println("E-TICKETING SYSTEM");
         System.out.println("1. LOGIN AS CLIENT");
-        System.out.println("2. LOGIN AS ORGANIZER");
+        System.out.println("2. LOGIN AS ORGANISER");
         System.out.println("3. SYSTEM ADMINISTRATION");
         System.out.println("0. EXIT");
         System.out.println("Enter your input...");
@@ -47,7 +44,8 @@ public class Main {
                 break;
             }
             case 2: {
-                // LOGIN AS ORGANIZER
+                // LOGIN AS ORGANISER
+                this.organiserMenu();
                 break;
             }
             case 3: {
@@ -60,6 +58,43 @@ public class Main {
                 System.out.println("IMPOSSIBLE OPERATION");
                 this.menu();
             }
+        }
+    }
+
+    private void organiserMenu() {
+        ArrayList<Organiser> organisers = this.getOrganisers();
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("*");
+        System.out.println("ORGANISER MENU");
+        for(Organiser organiser : organisers) {
+            System.out.println((organisers.indexOf(organiser) + 1) + ". " + organiser.getName() + " - " + organiser.getCompany() + " - " + organiser.getEmail());
+        }
+        System.out.println((organisers.size() + 1) + ". Register a new organiser");
+        System.out.println("0. PREVIOUS MENU");
+        System.out.println("Enter your input...");
+        int option;
+        Scanner scan = new Scanner(System.in);
+        option = scan.nextInt();
+        if(option == 0) {
+            this.menu();
+        }
+        else if(option == (organisers.size() + 1)) {
+            // register new organiser
+            organisers.add(CreateOrganiser.Create());
+            this.organiserMenu();
+        }
+        else if(option >= 1 && option <= organisers.size()) {
+            // select a organiser
+            Organiser organiser = organisers.get(option - 1);
+            SelectOrganiser so = new SelectOrganiser(organiser, organisers, this.getClients(), this.getVenues(), this.getEvents());
+            so.main();
+            this.organiserMenu();
+        }
+        else {
+            // unexpected command
+            System.out.println("IMPOSSIBLE OPERATION");
+            this.organiserMenu();
         }
     }
 
