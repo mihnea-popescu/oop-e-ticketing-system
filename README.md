@@ -25,4 +25,4 @@
 * Save data from the application's memory to the csv files in the storage folder
 * Manage venues (create + edit)
 
-## Grade: *TBA*
+## Grade: 10
